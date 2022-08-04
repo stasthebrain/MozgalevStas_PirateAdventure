@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - QuestItem
   - HPItem
+  - ItemText
   layers:
   - Default
   - TransparentFX
