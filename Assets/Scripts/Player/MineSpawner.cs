@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MineSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _mine; 
-    [SerializeField] private Transform _mineSpawnPlace; 
+    [SerializeField] private GameObject mine; 
+    [SerializeField] private Transform mineSpawnPlace; 
     private void Update()
     {
         if (Input.GetButtonDown("Fire3"))
         {
-            Instantiate(_mine, _mineSpawnPlace.position, _mineSpawnPlace.rotation);
+            Instantiate(mine, mineSpawnPlace.position, mineSpawnPlace.rotation);
         }
     }
 }
