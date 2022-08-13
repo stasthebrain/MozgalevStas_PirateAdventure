@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - QuestItem
   - HPItem
+  - ItemText
+  - Mine
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,8 +18,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - PostProcessing
   - 
   - 
   - 

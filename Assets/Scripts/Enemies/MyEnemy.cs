@@ -6,12 +6,12 @@ namespace PirateQuest
 {
     public class MyEnemy : MonoBehaviour
     {
-        [SerializeField] private int _health;
-        public void Hurt(int damage)
+        [SerializeField] private float EnemyHealth;
+        public void Hurt(float damage)
         {
-            
-            _health -= damage; ;
-            if (_health <= 0)
+
+            EnemyHealth -= damage; ;
+            if (EnemyHealth <= 0)
             {
                 Die();
             }

@@ -4,17 +4,20 @@ using UnityEngine;
 
 namespace PirateQuest
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class CannonBall : MonoBehaviour
     {
-        [SerializeField] private float speed;
+        [SerializeField] private float speed = 30f;
         [SerializeField] private float damage = 0.2f;
+        private Rigidbody rb;
 
-
-
-        private void Update()
+        private void Start()
         {
-            transform.position += transform.forward * Time.deltaTime * speed;
+            rb = GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * speed, ForceMode.Impulse);
         }
+
+        
 
         private void OnCollisionEnter(Collision collision)
         {

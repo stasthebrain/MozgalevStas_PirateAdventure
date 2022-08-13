@@ -27,8 +27,6 @@ public class Cannon : MonoBehaviour
             LookAtPlayer();
             Shoot();
         }
-        
-        
     }
 
     private void LookAtPlayer()
