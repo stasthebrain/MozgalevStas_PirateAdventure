@@ -9,33 +9,44 @@ namespace PirateQuest
     {
         [SerializeField] private Text questText;
         private float KeyItem;
-        [SerializeField] GameObject Gate;
+        [SerializeField] private Text questUseText;
+        [SerializeField] private GameObject player;
+        [SerializeField] private Transform NextLvlSpawn;
 
-        void Start()
-        {
-            questText.text = "Осмотреться";
-        }
+        //void Start()
+        //{
+        //    questText.text = "Осмотреться";
+        //}
 
 
-        void Update()
-        {
-            if (KeyItem == 1f)
-            {
-                questText.text = "Найти то, что открывается ключом";
-            }
-        }
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.tag == "Player" & Input.GetKeyDown(KeyCode.F) & KeyItem == 1f)
+            if (other.tag == "Boat" && (Input.GetKeyDown(KeyCode.F) && KeyItem == 1f))
             {
-                Destroy(Gate);
+                player.transform.position = NextLvlSpawn.position;
             }
             if (other.tag == "QuestItem" & Input.GetKeyDown(KeyCode.F))
             {
-                KeyItem = KeyItem + 1f;
+                KeyItem = 1f;
+                questText.text = "Найти применение веслу";
+            }
+            if (other.tag == "Boat" & (Input.GetKeyDown(KeyCode.F) && KeyItem == 0f))
+            {
+                questText.text = "Вам нечем грести, найдите весло";
             }
         }
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Boat")
+            {
+                questUseText.text = "Нажмите F, чтобы уплыть";
+            }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            questUseText.text = " ";
+        }
     }
 }

@@ -12,16 +12,19 @@ public class EnemySceleton : MonoBehaviour
     private Transform player;
     [SerializeField] private float findDist;
     [SerializeField] private Transform[] points;
-    [SerializeField] private float EnemyHealth;
-    [SerializeField] private float shootTime = 3f;
+    [SerializeField] private float EnemyHealth = 1f;
+    
     private float timer;
     private float nextShootTime;
     private int index;
+    Animator animator;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent.SetDestination(points[Random.Range(0, points.Length)].position);
+        animator = GetComponent<Animator>();
+        
     }
 
 
@@ -36,21 +39,27 @@ public class EnemySceleton : MonoBehaviour
         }
         else
         {
+            
             agent.SetDestination(player.position);
+            
         }
+        animStop();
     }
     private void Patroling()
     {
-        if (agent.remainingDistance < agent.stoppingDistance)
+        
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            timer += Time.deltaTime;
-            if (timer > 3)
-            {
-                timer = 0;
+           
+
+            //timer += Time.deltaTime;
+            //if (timer > 3)
+            //{
+            //    timer = 0;
                 index = (index + 1) % points.Length;
                 agent.SetDestination(points[index].position);
-                
-            }
+            //}
+            
         }
     }
     public void Hurt(float damage)
@@ -70,8 +79,12 @@ public class EnemySceleton : MonoBehaviour
     {
         dist = Vector3.Distance(player.transform.position, transform.position);
     }
-    void Delay()
-    { 
-
+    private void animStop()
+    {
+        animator.SetBool("isMoving", false);
+        if (transform.hasChanged)
+        {
+            animator.SetBool("isMoving", true);
+        }
     }
 }
