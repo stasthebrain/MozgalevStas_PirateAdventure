@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace PirateQuest
 {
-    public class QuestItem : MonoBehaviour
+    public class QuestItem : QuestManager
     {
         [SerializeField] GameObject KeyItemModel;
         [SerializeField] private Text itemText;

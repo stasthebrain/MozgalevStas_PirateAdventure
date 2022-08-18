@@ -11,6 +11,7 @@ TagManager:
   - ItemText
   - Mine
   - Bullet
+  - Boat
   layers:
   - Default
   - TransparentFX

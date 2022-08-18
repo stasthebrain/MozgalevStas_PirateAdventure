@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,15 +34,22 @@ namespace PirateQuest
         Vector3 moveDirection;
 
         Rigidbody rb;
+        Animator animator;
+
         private bool isRunning;
         private bool isGrounded;
         private bool ReadyToJump;
+        
+
+        
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
             rb.freezeRotation = true;
             ReadyToJump = true;
+            animator = GetComponent<Animator>();
+
         }
 
         private void Update()
@@ -57,12 +65,26 @@ namespace PirateQuest
                 rb.drag = 0;
             }
             SpeedControl();
+            
+
+
+
         }
 
         private void FixedUpdate()
         {
             PlayerMove();
+            AnimManager();
         }
+
+        private void AnimManager()
+        {
+            Vector3 RbVelocity = transform.InverseTransformDirection(rb.velocity);
+            animator.SetFloat("y", RbVelocity.z);
+            animator.SetFloat("x", rb.angularVelocity.y);
+
+        }
+
 
         private void MyInput()
         {
@@ -79,15 +101,21 @@ namespace PirateQuest
 
         private void PlayerMove()
         {
+           
+            
             moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
             if (isGrounded)
             {
                 rb.AddForce(moveDirection.normalized * (isRunning ? RunSpeed : Speed) * multiplier, ForceMode.Force);
+
             }
-            else if(!isGrounded)
+            else if (!isGrounded)
             {
                 rb.AddForce(moveDirection.normalized * (isRunning ? RunSpeed : Speed) * multiplier * AirMultiplier, ForceMode.Force);
             }
+
+            
+
         }
 
         private void SpeedControl()
@@ -109,7 +137,9 @@ namespace PirateQuest
         {
             ReadyToJump = true;
         }
-        
+       
+       
+
 
     }
 }
