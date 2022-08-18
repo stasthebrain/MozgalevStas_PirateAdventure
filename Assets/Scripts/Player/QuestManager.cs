@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace PirateQuest
 {
@@ -11,12 +12,8 @@ namespace PirateQuest
         private float KeyItem;
         [SerializeField] private Text questUseText;
         [SerializeField] private GameObject player;
-        [SerializeField] private Transform NextLvlSpawn;
+        
 
-        //void Start()
-        //{
-        //    questText.text = "Осмотреться";
-        //}
 
 
 
@@ -24,7 +21,8 @@ namespace PirateQuest
         {
             if (other.tag == "Boat" && (Input.GetKeyDown(KeyCode.F) && KeyItem == 1f))
             {
-                player.transform.position = NextLvlSpawn.position;
+                KeyItem = 0f;
+                SceneManager.LoadScene(2);
             }
             if (other.tag == "QuestItem" & Input.GetKeyDown(KeyCode.F))
             {
@@ -35,6 +33,7 @@ namespace PirateQuest
             {
                 questText.text = "Вам нечем грести, найдите весло";
             }
+            
         }
 
         private void OnTriggerEnter(Collider other)
@@ -48,5 +47,6 @@ namespace PirateQuest
         {
             questUseText.text = " ";
         }
+        
     }
 }
