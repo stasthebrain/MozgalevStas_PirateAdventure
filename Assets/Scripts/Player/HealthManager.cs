@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace PirateQuest
 {
     public class HealthManager : MonoBehaviour
     {
-        //[SerializeField] private Text GameOverText;
-        //[SerializeField] private Camera camera;
+       
+        
+        
         public float HP =1f;
         [SerializeField] private Image UIHP;
         public Text HPBottleT;
@@ -27,10 +29,7 @@ namespace PirateQuest
                     HP = 1f;
                 }
             }
-            //if (camera.transform.position.y <= 5.5f)
-            //{
-            //    Destroy(camera);
-            //}
+           
 
         }
         public void Hit(float damage)
@@ -49,10 +48,6 @@ namespace PirateQuest
                 HPBottle = HPBottle + 1f;
             }
         }
-        //void GameOver()
-        //{
-        //    GameOverText.text = "Конец";
-        //}
-
+        
     }
 }

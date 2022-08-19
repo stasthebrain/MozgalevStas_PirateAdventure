@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace PirateQuest
 {
+    [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(Rigidbody))]
     public class Movement : MonoBehaviour
     {
 
@@ -16,6 +18,9 @@ namespace PirateQuest
         [SerializeField] private float AirMultiplier;
         [SerializeField] private float playerHeight;
         [SerializeField] private float GroundRay = 0.2f;
+        [SerializeField] private float walkPitch = 1f;
+        [SerializeField] private float runPitch = 1.4f;
+
 
         [SerializeField] private Transform orientation;
 
@@ -35,6 +40,7 @@ namespace PirateQuest
 
         Rigidbody rb;
         Animator animator;
+        private AudioSource source;
 
         private bool isRunning;
         private bool isGrounded;
@@ -49,6 +55,7 @@ namespace PirateQuest
             rb.freezeRotation = true;
             ReadyToJump = true;
             animator = GetComponent<Animator>();
+            source = GetComponent<AudioSource>();
 
         }
 
@@ -65,9 +72,22 @@ namespace PirateQuest
                 rb.drag = 0;
             }
             SpeedControl();
-            
 
-
+            if (moveDirection.sqrMagnitude == 0)
+            {
+                if (source.isPlaying)
+                {
+                    source.Stop();
+                }
+            }
+            else
+            {
+                if (!source.isPlaying)
+                { 
+                    source.Play();
+                }
+            }
+            source.pitch = isRunning ? runPitch : walkPitch;
 
         }
 
