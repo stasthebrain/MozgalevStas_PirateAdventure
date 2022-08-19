@@ -12,6 +12,8 @@ TagManager:
   - Mine
   - Bullet
   - Boat
+  - Boss
+  - BoatRule
   layers:
   - Default
   - TransparentFX
