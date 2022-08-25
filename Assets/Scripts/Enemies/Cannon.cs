@@ -12,6 +12,7 @@ public class Cannon : MonoBehaviour
     private Transform player;
     private float dist;
     [SerializeField] private float findDist;
+    public AudioSource bomb;
 
     private void Start()
     {
@@ -45,8 +46,10 @@ public class Cannon : MonoBehaviour
     {
         if (Time.time > nextShootTime)
         {
+            bomb.Play();
             Instantiate(typeOfMissiles, spawnPoint.position, spawnPoint.rotation);
             nextShootTime = Time.time + shootTime;
+            
         }
     }
     void DistanceFind()
